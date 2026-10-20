@@ -64,7 +64,7 @@ xlim(ax4, [0 100]);
 disp("Receiving sensor data. Close the figure to stop.");
 
 try
-    while isvalid(fig)
+    while ishandle(fig)
 
         %% Read one complete serial line
         rawLine = strtrim(readline(s));
@@ -206,10 +206,20 @@ try
         end
     end
 
+
 catch ME
-    disp("Acquisition stopped.");
-    disp(ME.message);
+    fprintf(2, "\n--- MATLAB ERROR DETAILS ---\n");
+    fprintf(2, "%s\n", ...
+        getReport(ME, "extended", "hyperlinks", "off"));
+
+    for k = 1:numel(ME.stack)
+        fprintf(2, "File: %s | Line: %d | Function: %s\n", ...
+            ME.stack(k).file, ...
+            ME.stack(k).line, ...
+            ME.stack(k).name);
+    end
 end
+
 
 %% Keep only valid samples
 time_us = time_us(1:n);
