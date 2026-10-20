@@ -25,7 +25,12 @@ P2 = nan(maxSamples, 1);
 n = 0;
 
 %% Live graph
-fig = figure("Name", "Water Pipeline Sensor Monitoring");
+fig = figure( ...
+    "Name", "Water Pipeline Sensor Monitoring", ...
+    "NumberTitle", "off", ...
+    "Visible", "on", ...
+    "WindowState", "normal");
+drawnow;
 
 % P1 time-domain plot
 ax1 = subplot(2,2,1);
