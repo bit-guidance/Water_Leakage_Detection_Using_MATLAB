@@ -4,7 +4,7 @@ clear;
 close all;
 
 %% Serial configuration
-port = "COM3";       % Change to your Arduino COM port
+port = "COM19";       % Change to your Arduino COM port
 baudRate = 115200;
 
 s = serialport(port, baudRate);
@@ -190,11 +190,10 @@ try
                         title(ax4, sprintf( ...
                             "P2 Live FFT (Fs = %.2f Hz)", FsActual));
 
-                        %% Report timing information
-                        fprintf(["Samples: %d | Fs: %.3f Hz | " ...
-                            "Jitter: %.3f%% | FFT length: %d\n"], ...
-                            n, FsActual, ...
-                            100*relativeJitter, L);
+                        %% Report timing information                      
+                        fprintf(1, 'Samples: %d | Fs: %.3f Hz | Jitter: %.3f%% | FFT length: %d\n', ...
+                            n, FsActual, 100*relativeJitter, L);
+
                     end
                 end
             end
